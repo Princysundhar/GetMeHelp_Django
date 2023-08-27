@@ -1,0 +1,55 @@
+{% extends 'admin/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">View Approved Workers  </h3>
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered" align="center">
+    <tr align="center" style="background-color: #D81324;color: white">
+      <th scope="col">#</th>
+      <th scope="col">Category</th>
+      <th scope="col">Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Place</th>
+      <th scope="col">Post</th>
+      <th scope="col">Pin</th>
+      <th scope="col">Email</th>
+      <th scope="col">contact</th>
+      <th scope="col">photo</th>
+      <th scope="col">&nbsp;</th>
+{#      <th scope="col">&nbsp;</th>#}
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td align="center">&nbsp;{{ forloop.counter }}</td>
+      <td align="center">&nbsp;{{ i.CATEGORY.category }}</td>
+      <td align="center"> {{ i.name }}</td>
+      <td align="center">&nbsp;{{ i.gender }}</td>
+      <td align="center">&nbsp;{{ i.place }}</td>
+      <td align="center">&nbsp;{{ i.post }}</td>
+      <td align="center"> {{ i.pin }}</td>
+      <td align="center">&nbsp;{{ i.email }}</td>
+      <td align="center">&nbsp;{{ i.contact }}</td>
+      <td align="center"><img src="{{ i.photo }}" width="100px" height="100px"> </td>
+
+        {% if i.LOGIN.type == 'worker' %}
+            <td align="center"><a href="/admin_block_worker/{{ i.LOGIN.id }}" class="btn btn-success">Block</a></td>
+        {% else %}
+            <td align="center"><a href="/admin_unblock_worker/{{ i.LOGIN.id }}" class="btn btn-success">Unblock</a></td>
+        {% endif %}
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+
+
+{% endblock %}

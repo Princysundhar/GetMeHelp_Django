@@ -1,0 +1,146 @@
+{% extends 'user/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">Booking Map</h3>
+<form action="/user_send_request/{{ rid }}/{{ am }}" method="post" enctype="multipart/form-data" name="form1" id="form1">
+    {% csrf_token %}
+  <table style="width: 800px;height:500px;border-color: #D81324" align="center" class="table table-bordered">
+
+        <tr>
+            <td><input type="hidden" name="textfield9" id="textfield9" class="form-control" required />
+                <input type="hidden" name="textfield10" id="textfield10" class="form-control" required /><div id="gmap"></div></td>
+        </tr>
+
+    <tr>
+        <th colspan="2" scope="row"><div align="center"><input type="submit" name="button" id="button" value="Submit" class="btn btn-primary" /></div></th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+    <style type="text/css">
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#map_canvas { height: 100% }
+</style>
+
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false">
+</script>
+<script type="text/javascript">
+
+    var map;
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(11.618061975930,75.36565089010);
+            var myOptions = {
+                zoom:7,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+            // marker refers to a global variable
+            marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map
+            });
+
+            google.maps.event.addListener(map, "click", function(event) {
+                // get lat/lon of click
+                var clickLat = event.latLng.lat();
+                var clickLon = event.latLng.lng();
+
+                // show in input box
+                document.getElementById("textfield9").value = clickLat.toFixed(5);
+                document.getElementById("textfield10").value = clickLon.toFixed(5);
+
+{#                  var marker = new google.maps.Marker({#}
+{#                        position: new google.maps.LatLng(clickLat,clickLon),#}
+{#                        map: map#}
+{#                     });#}
+            });
+    }
+
+    window.onload = function () { GetMylocation() };
+
+
+</script>
+     <style>
+ div#gmap {
+
+        width: 100%;
+        height: 450px;
+        border:double;
+ }
+    </style>
+
+{#    <form id="form1" runat="server">#}
+<center>
+<!-- MAP HOLDER -->
+
+<!-- REFERENCES -->
+{#Lat: <input type="text" id='lat'>#}
+{#Lon: <input type="text" id='lon'>#}
+
+</center>
+
+
+
+
+<script>
+
+function GetMylocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    //x.innerHTML = "Geolocation is not supported by this browser.";
+      alert("Geolocation is not supported by this browser.")
+  }
+}
+var x1 = document.getElementById("textfield9");
+var x2 = document.getElementById("textfield10");
+var map;
+function showPosition(position) {
+  x1.value=position.coords.latitude;
+  x2.value=position.coords.longitude;
+
+  var myLatlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+            var myOptions = {
+                zoom:14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+            // marker refers to a global variable
+            marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map
+            });
+
+            google.maps.event.addListener(map, "click", function(event) {
+                // get lat/lon of click
+                var clickLat = event.latLng.lat();
+                var clickLon = event.latLng.lng();
+
+                // show in input box
+                document.getElementById("textfield9").value = clickLat.toFixed(5);
+                document.getElementById("textfield10").value = clickLon.toFixed(5);
+
+{#                  var marker = new google.maps.Marker({#}
+{#                        position: new google.maps.LatLng(clickLat,clickLon),#}
+{#                        map: map#}
+{#                     });#}
+            });
+
+
+}
+</script>
+
+{% endblock %}

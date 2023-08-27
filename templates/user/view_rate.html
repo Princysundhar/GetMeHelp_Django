@@ -1,0 +1,43 @@
+{% extends 'user/index.html' %}
+{% block body %}
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+<body>
+<h3 style="text-align:center;font-family: Roboto;">View Rate and Review</h3>
+<form id="form1" name="form1" method="post" action="">
+  <table align="center" class="table table-bordered">
+    <tr align="center" style="background-color: #D81324;color: white">
+      <th>#</th>
+      <th>Rating</th>
+      <th align="center">User Name</th>
+      <th>Date</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td align="center">&nbsp;{{ forloop.counter }}</td>
+      <td >
+        {% for j in i.rate %}
+           <img src="{% static '/design/star/full.jpg' %}" height="20" width="20" />
+        {% endfor %}
+        {% for j in i.norate %}
+           <img src="{% static '/design/star/empty.jpg' %}" height="20" width="20" />
+        {% endfor %}
+      </td>
+
+      <td align="center">{{ i.name }}</td>
+      <td align="center"> {{ i.date }}</td>
+      <td align="center">{{ i.review }}</td>
+    </tr>
+       {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+
+{% endblock %}

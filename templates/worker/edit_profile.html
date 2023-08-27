@@ -1,0 +1,90 @@
+{% extends 'worker/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">Edit Profile</h3>
+
+<form action="/worker_edit_profile_post/{{ worker_id }}" method="post" enctype="multipart/form-data" name="form1" id="form1">
+{% csrf_token %}
+  <table class="table table-bordered" align="center" style="width: 650px;height: 300px;">
+      <tr>
+      <th scope="row">Category</th>
+      <td>
+        <select name="select" id="select">
+            {% for i in data2 %}
+                <option value="{{ i.id }}" {% if i.id == data2.CATEGORY.id %} selected {% endif %}>{{ i.category }}</option>
+
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <th scope="row">Name</th>
+      <td>
+      <input type="text" name="textfield" id="textfield" value="{{ data1.name }}" class="form-control" required /></td>
+    </tr>
+    <tr>
+      <th scope="row">Gender</th>
+      <td><input type="radio" name="RadioGroup1" value="Male" id="RadioGroup1_0" {% if data1.gender == 'Male' %}checked {% endif %} />Male</label>
+          <input type="radio" name="RadioGroup1" value="Female" id="RadioGroup1_1" {% if data1.gender == 'Female' %}checked {% endif %} />Female</label>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Place</th>
+      <td>
+      <input type="text" name="textfield3" id="textfield3" value="{{ data1.place }}" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th scope="row">Post</th>
+      <td>
+      <input type="text" name="textfield4" id="textfield4" value="{{ data1.post }}" class="form-control" required /></td>
+    </tr>
+    <tr>
+      <th scope="row">Pin</th>
+      <td>
+      <input type="text" name="textfield5" id="textfield5" value="{{ data1.pin }}" class="form-control" required /></td>
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td>
+      <input type="text" name="textfield6" id="textfield6" value="{{ data1.email }}" class="form-control" required /></td>
+    </tr>
+    <tr>
+      <th scope="row">Lattitude</th>
+      <td>
+      <input type="text" name="textfield9" id="textfield9" value="{{ data1.lattitude }}" class="form-control" required/></td>
+    </tr>
+      <tr>
+      <th scope="row">Longitude</th>
+      <td>
+      <input type="text" name="textfield10" id="textfield10" value="{{ data1.longitude }}" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th scope="row">Contact</th>
+      <td>
+      <input type="text" name="textfield7" id="textfield7" value="{{ data1.contact }}" class="form-control" required /></td>
+    </tr>
+    <tr>
+      <th scope="row">Photo</th>
+      <td>
+      <img src="{{ data1.photo }}" alt="" width="100px" height="100px"/>
+      <input type="file" name="fileField" id="fileField" class="form-control" required  /></td>
+    </tr>
+
+    <tr>
+      <th colspan="2" scope="row"><div align="center"><input type="submit" name="button" id="button" value="Submit" class="btn btn-primary" /></th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+
+
+{% endblock %}

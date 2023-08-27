@@ -1,0 +1,50 @@
+{% extends 'user/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">View Request</h3>
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered" align="center">
+    <tr align="center" style="background-color: #D81324;color: white">
+      <th scope="col">#</th>
+      <th scope="col">Worker</th>
+      <th scope="col">Service</th>
+      <th scope="col">Date</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Location</th>
+      <th scope="col"> </th>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">&nbsp;</th>
+      <th scope="col"> </th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td align="center">&nbsp;{{ forloop.counter }}</td>
+      <td align="center">&nbsp;{{ i.SERVICE.WORKER.name }}</td>
+      <td align="center">&nbsp;{{ i.SERVICE.service }}</td>
+      <td align="center">&nbsp;{{ i.date }}</td>
+      <td align="center"> {{ i.amount }}</td>
+      <td align="center"><a href="https://www.google.com/maps/?q={{ row.latitude }} {{ row.longitude }}" class="btn btn-success">Locate</a></td>
+      <td align="center"><a href="/user_view_bill/{{ i.id }}#aa" class="btn btn-success">View Bill</a></td>
+    {% if i.payment_status == 'pending' %}
+      <td align="center"><a href="/user_make_payment/{{ i.id }}#aa" class="btn btn-success">Make Payment</a></td>
+    {% else %}
+       <td style="color: #D81324" align="center"> <strong> {{ i.payment_status }} </strong></td>
+    {% endif %}
+      <td align="center"><a href="/user_add_rating/{{ i.id }}#aa" class="btn btn-success">Send rate</a></td>
+      <td align="center"><a href="/user_chat_worker/{{ i.id }}#aa" class="btn btn-success">Chat</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+
+{% endblock %}

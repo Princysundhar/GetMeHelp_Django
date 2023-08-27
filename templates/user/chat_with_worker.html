@@ -1,0 +1,30 @@
+{% extends 'user/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">Customer With Worker Chat</h3>
+<form id="form1" name="form1" method="post" action="">
+{% csrf_token %}
+  <table style="width: 500px;height: 100px" align="center" class="table table-bordered">
+      {% for i in data %}
+
+    <tr>
+      <td scope="col"><a href="/user_chat_worker/{{ i.id }}"><div align="center">Name: {{ i.name }}<br />
+      phone no:{{ i.contact }}</div> </a></td>
+    </tr>
+
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+
+
+{% endblock %}

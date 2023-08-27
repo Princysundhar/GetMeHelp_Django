@@ -1,0 +1,36 @@
+{% extends 'user/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">view reply</h3>
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered" align="center">
+    <tr align="center" style="background-color: #D81324;color: white">
+      <th scope="col">#</th>
+      <th scope="col">Complaint</th>
+      <th scope="col">complaint date</th>
+      <th scope="col">Reply</th>
+      <th scope="col">Reply date</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td align="center">&nbsp;{{ forloop.counter }}</td>
+      <td align="center">&nbsp;{{ i.complaint }}</td>
+      <td align="center"> {{ i.complaint_date }}</td>
+      <td align="center">&nbsp;{{ i.reply }}</td>
+      <td align="center">&nbsp;{{ i.reply_date }}</td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+
+{% endblock %}

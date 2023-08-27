@@ -1,0 +1,128 @@
+{% extends 'user/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">Payment</h3>
+<form id="form1" name="form1" method="post" action="/user_make_payment_post/{{ rid }}">
+    {% csrf_token %}
+  <table style="width: 500px;height: 100px;" align="center" class="table table-bordered">
+    <tr>
+      <th width="98" scope="col">Payment Mode</th>
+      <th width="178" scope="col"><p>
+          <input type="radio" name="RadioGroup1" value="Online" id="RadioGroup1_0"/>Online</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="RadioGroup1" value="Offline" id="RadioGroup1_1" />Offline</label>
+  
+      </p></th>
+    </tr>
+        <tr>
+            <td colspan="7" id="c">
+                <input type="checkbox" id="chk1" name="chk1" />Use Credit Points
+            </td>
+        </tr>
+        <tr id="tr1">
+            <td colspan="7">
+                <p>Credit Points available : <span id="sp1"></span></p>
+                <p>Amount payable with credit points : ₹ <span id="sp2"></span></p>
+                <p>Pay using ₹ <span id="sp3"></span> + <span id="sp4"></span> credit points </p>
+                <a href="/credit_payment_mode" CLASS="btn btn-success">PAY USING CREDIT POINTS</a>
+            </td>
+        </tr>
+        <tr id="tr2">
+            <td colspan="7">
+                <p style="color: red; font-size: 26;">* No credit points available</p>
+            </td>
+        </tr>
+
+    <tr>
+      <td colspan="2"><div align="center"><div align="center"><input type="submit" name="button" id="button" value="Submit" class="btn btn-primary" /></div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+<script src="/static/jquery.min.js"></script>
+<script>
+
+     $(document).ready(function () {
+{#         alert("hiiiiiiiiiiiiiiiii")#}
+    var check=false;
+    $("#tr1").hide();
+    $("#tr2").hide();
+    $("#c").hide();
+ $("#RadioGroup1_1").click(function (){
+
+ $("#c").hide();
+ $("#tr1").hide();
+    $("#tr2").hide();
+        });
+ $("#RadioGroup1_0").click(function (){
+
+ $("#c").show();
+        });
+
+        $("#chk1").click(function () {
+
+             if(check==false){                      // checkbox already unchecked
+                 check=true;                        //  changing status to checked
+                 var amt=$("#hid").val();           // total amount
+
+                             $.ajax({
+                url: '/ajax_view_credit_points',
+                type: 'post',
+                data: {amt:amt},
+                success: function (respons) {
+                    var data1=respons['data'];
+                    if(data1=="no"){            // no credit points
+                        $("#tr2").show();       //  show alert message
+                        $("#tr1").hide();       //  hide credit point details
+{#                        alert('hi')#}
+                    }
+                    else if(data1 == "ok") {
+                        var credit=respons['credit']
+                        var payable=respons['payable']
+                        var balance=respons['balance']
+                        $("#sp1").empty();      // clearing previous data
+                        $("#sp2").empty();
+                        $("#sp3").empty();
+                        $("#sp4").empty();
+                        $("#sp1").append("<b style='font-size=20;color:red;'>"+credit+"</b>");      // setting value to placeholder
+                        $("#sp2").append("<b style='font-size=20;color:green;'>"+payable+"</b>");
+                        $("#sp3").append("<b style='font-size=24;color:green;'>"+balance+"</b>");
+                        $("#sp4").append("<b style='font-size=24;color:green;'>"+credit+"</b>");
+                         $("#tr1").show();
+                         $("#tr2").hide();
+                    }
+
+                }, error: function (error) {
+
+                }
+
+            });
+
+
+             }
+             else{
+                 check=false;
+                 $("#tr1").hide();
+                 $("#tr2").hide();
+             }
+
+{#            alert(check);#}
+
+{#            colgid = $("#clg").val()#}
+
+        });
+
+
+        });
+</script>
+
+
+{% endblock %}

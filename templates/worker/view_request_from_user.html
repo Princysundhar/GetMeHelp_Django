@@ -1,0 +1,54 @@
+{% extends 'worker/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">View Request From Users</h3>
+<form id="form1" name="form1" method="post" action="">
+  <table  class="table table-bordered" align="center">
+    <tr align="center" style="background-color: #D81324;color: white">
+      <th scope="col">#</th>
+      <th scope="col">Service</th>
+      <th scope="col">Userinfo</th>
+      <th scope="col">Date</th>
+{#      <th scope="col">Status</th>#}
+      <th scope="col">payment Status</th>
+      <th scope="col">&nbsp;</th>
+      <th scope="col"> </th>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">&nbsp;</th>
+      <th scope="col"> </th>
+
+
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td align="center">&nbsp;{{ forloop.counter }} </td>
+      <td align="center"> {{ i.SERVICE.service }} </td>
+      <td align="center">&nbsp;{{ i.USER.name }} <br> {{ i.USER.email }} </td>
+      <td align="center">&nbsp;{{ i.date }} </td>
+{#      <td align="center">&nbsp;{{ i.status }} </td>#}
+      <td align="center"> {{ i.payment_status }} </td>
+      <td align="center"><a href="https://www.google.com/maps/?q={{ row.latitude }} {{ row.longitude }}" class="btn btn-success">Locate</a></td>
+      <td align="center"><a href="/worker_add_additional_charges/{{ i.id }}#aa" class="btn btn-success">Additional Charge</a></td>
+      <td align="center"><a href="/worker_chat_customer/{{ i.id }}#aa" class="btn btn-success">Chat</a></td>
+        {% if i.status == 'pending' %}
+      <td align="center"><a href="/worker_status_approve/{{ i.id }}#aa" class="btn btn-success">Approve</a></td>
+      <td align="center"><a href="/worker_status_reject/{{ i.id }}#aa" class="btn btn-success">Reject</a></td>
+        {% else %}
+      <td colspan="2" align="center" style="color: #D81324;text-align: center">&nbsp;{{ i.status }} </td>
+        {% endif %}
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+
+{% endblock %}

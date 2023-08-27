@@ -1,0 +1,70 @@
+{% extends 'worker/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">View Profile</h3>
+
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <table style="width: 650px;height: 300px;border-color: #D81324" class="table table-bordered" align="center">
+      <tr align="center">
+      <th scope="row">Category</th>
+      <td>{{ data.CATEGORY.category }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Name</th>
+      <td>{{ data.name }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Gender</th>
+      <td>{{ data.gender }}</td>
+    </tr>
+
+    <tr align="center">
+      <th scope="row">Place</th>
+      <td>{{ data.place }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Post</th>
+      <td>{{ data.post }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Pin</th>
+      <td>{{ data.pin }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Email</th>
+      <td>{{ data.email }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Contact</th>
+      <td>{{ data.contact }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Lattitude</th>
+      <td>{{ data.lattitude }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Longitude</th>
+      <td>{{ data.longitude }}</td>
+    </tr>
+    <tr align="center">
+      <th scope="row">Photo</th>
+      <td><img src="{{ data.photo }}" height="100px" width="100px"> </td>
+    </tr>
+
+    <tr align="center">
+        <td colspan="2" align="center"><a href="/worker_edit_profile/{{ data.id }}#aa" class="btn btn-primary">Edit profile</a></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+
+{% endblock %}

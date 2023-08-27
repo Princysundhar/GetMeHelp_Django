@@ -1,0 +1,44 @@
+{% extends 'admin/index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 style="text-align:center;font-family: Roboto;">View Blocked Workers</h3>
+<form id="form1" name="form1" method="post" action="">
+  <table width="200" border="1" cellspacing="1" cellpadding="1" align="center">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">place</th>
+      <th scope="col">post</th>
+      <th scope="col">pin</th>
+      <th scope="col">Email</th>
+      <th scope="col">conatct</th>
+      <th scope="col">Photo</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>&nbsp;{{ forloop.counter }}</td>
+      <td>&nbsp;{{ i.name }}</td>
+      <td>&nbsp;{{ i.gender }}</td>
+      <td>&nbsp;{{ i.place }}</td>
+      <td>&nbsp;{{ i.post }}</td>
+      <td>&nbsp;{{ i.pin }}</td>
+      <td>&nbsp;{{ i.email }}</td>
+      <td>&nbsp;{{ i.contact }}</td>
+      <td>&nbsp;<img src="{{ i.photo }}" height="100px;" width="100px" > </td>
+    </tr>
+   {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+
+{% endblock %}
